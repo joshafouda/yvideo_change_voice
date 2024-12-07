@@ -8,26 +8,32 @@ import tempfile
 import ffmpeg
 
 
-# Fonction : Transcrire l'audio d'une vidéo
-def transcribe_audio(video_path, model_type="base"):
-    model = whisper.load_model(model_type)
+# Fonction : Transcrire l'audio d'une vidéo avec Whisper medium
+def transcribe_audio(video_path):
+    """
+    Transcrit l'audio d'une vidéo MP4 en utilisant le modèle Whisper 'medium'.
+    :param video_path: Chemin du fichier vidéo.
+    :return: Texte transcrit et segments temporels.
+    """
+    # Charger le modèle Whisper le plus sophistiqué
+    model = whisper.load_model("medium")
+
+    # Extraire l'audio de la vidéo
     clip = VideoFileClip(video_path)
     temp_audio = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
     clip.audio.write_audiofile(temp_audio.name)
+
+    # Transcrire l'audio avec Whisper
     result = model.transcribe(temp_audio.name)
+
+    # Supprimer le fichier audio temporaire
     os.unlink(temp_audio.name)
+
+    # Retourner le texte transcrit et les segments
     return result["text"], result["segments"]
 
-# Fonction : Traduire un texte
-"""
-def translate_text(text, src_lang="en", tgt_lang="fr"):
-    model_name = f"Helsinki-NLP/opus-mt-{src_lang}-{tgt_lang}"
-    tokenizer = MarianTokenizer.from_pretrained(model_name)
-    model = MarianMTModel.from_pretrained(model_name)
-    translated = model.generate(**tokenizer(text, return_tensors="pt", padding=True))
-    return tokenizer.decode(translated[0], skip_special_tokens=True)
-"""
 
+# Fonction : Diviser le texte en segments plus courts 
 def split_text_into_chunks(text, max_length=500):
     """Divise le texte en chunks ne dépassant pas max_length tokens."""
     words = text.split()
@@ -49,6 +55,7 @@ def split_text_into_chunks(text, max_length=500):
     return chunks
 
 
+# Fonction : Traduire un texte
 def translate_text(text, src_lang="en", tgt_lang="fr", max_length=500):
     """Traduit le texte en morceaux pour éviter les erreurs de longueur."""
     model_name = f"Helsinki-NLP/opus-mt-{src_lang}-{tgt_lang}"
