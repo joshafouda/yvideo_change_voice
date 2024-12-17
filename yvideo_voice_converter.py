@@ -8,15 +8,15 @@ import tempfile
 import ffmpeg
 
 
-# Fonction : Transcrire l'audio d'une vidéo avec Whisper medium
+# Fonction : Transcrire l'audio d'une vidéo avec Whisper small
 def transcribe_audio(video_path):
     """
-    Transcrit l'audio d'une vidéo MP4 en utilisant le modèle Whisper 'medium'.
+    Transcrit l'audio d'une vidéo MP4 en utilisant le modèle Whisper 'small'.
     :param video_path: Chemin du fichier vidéo.
     :return: Texte transcrit et segments temporels.
     """
     # Charger le modèle Whisper le plus sophistiqué
-    model = whisper.load_model("medium")
+    model = whisper.load_model("small")
 
     # Extraire l'audio de la vidéo
     clip = VideoFileClip(video_path)
