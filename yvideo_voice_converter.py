@@ -115,7 +115,42 @@ def process_video(video_path, src_lang, tgt_lang, output_video_path, output_audi
 
 
 # Interface utilisateur avec Streamlit
-st.title("Traducteur de vidéos MP4")
+st.set_page_config(page_title="Traducteur de vidéos MP4 avec l'IA", layout="wide")
+#st.title("Traducteur de vidéos MP4 avec l'IA")
+
+# Conteneur pour aligner les éléments horizontalement
+col1, col2, col3 = st.columns([1, 4, 1])
+
+# Colonne gauche : Image
+with col1:
+    st.image(
+        "linkedin_profil.png",  # Remplacez par le chemin de votre image
+        width=80,     # Ajustez la taille si nécessaire
+        use_column_width=False,
+    )
+
+# Colonne centrale : Titre
+with col2:
+    st.markdown(
+        """
+        <h1 style='text-align: center; margin-bottom: 0;'>Traducteur de vidéos MP4 avec l'IA</h1>
+        """,
+        unsafe_allow_html=True,
+    )
+
+# Colonne droite : Nom et lien LinkedIn
+with col3:
+    st.markdown(
+        """
+        <div style='text-align: right;'>
+            <a href="https://www.linkedin.com/in/josu%C3%A9-afouda/" target="_blank" style='text-decoration: none; color: #0077b5;'>
+                <strong>Josué AFOUDA</strong>
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 st.write("Téléchargez une vidéo MP4, choisissez la langue d'origine et la langue cible, puis cliquez sur **Run** pour générer une version traduite.")
 
 # Téléchargement de la vidéo par l'utilisateur
