@@ -1,11 +1,9 @@
-streamlit==1.18.0
-torch==2.5.1
-torchaudio==2.5.1
+numpy==1.22.0
 TTS==0.22.0
-validators==0.34.0
+openai-whisper==20240930
 moviepy==1.0.3
 transformers==4.47.0
+streamlit==1.18.0
+validators==0.34.0
 ffmpeg==1.4
-numpy==1.22.0
 nltk==3.9.1
-openai-whisper==20240930
